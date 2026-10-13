@@ -87,7 +87,7 @@ Dokumen ini berisi daftar tiket tugas (Task Tickets) untuk pengembangan sistem C
 
 ### TKT-501: CRUD Data Pengalaman di CMS
 *   **Prioritas:** Sedang
-*   **Deskripsi:** Membuat fitur pengelolaan pengalaman (Volunteer, Pelatihan, Organisasi, Publikasi).
+*   **Deskripsi:** Membuat fitur pengelolaan pengalaman (Sertifikasi, Kegiatan, Publikasi).
 *   **Kriteria Penerimaan:**
     *   Tabel `experiences` dibuat dengan fitur translatable pada kolom judul dan deskripsi.
     *   Admin dapat mengkategorikan pengalaman, mengatur tahun, dan mengunggah logo instansi/kegiatan.
@@ -96,7 +96,7 @@ Dokumen ini berisi daftar tiket tugas (Task Tickets) untuk pengembangan sistem C
 *   **Prioritas:** Sedang
 *   **Deskripsi:** Membuat API untuk mendistribusikan data pengalaman.
 *   **Kriteria Penerimaan:**
-    *   Endpoint mendukung *query parameter* untuk *filtering* berdasarkan kategori (misal: `?category=volunteer`).
+    *   Endpoint mendukung *query parameter* untuk *filtering* berdasarkan kategori.
     *   Data JSON yang dikembalikan mengikuti bahasa yang direquest.
 
 ---
