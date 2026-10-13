@@ -32,6 +32,7 @@ class ProfileForm
                 FileUpload::make('photo')
                     ->label('Foto Profil')
                     ->image()
+                    ->disk('public')
                     ->directory('profile-photos'),
 
                 TextInput::make('gpa')
