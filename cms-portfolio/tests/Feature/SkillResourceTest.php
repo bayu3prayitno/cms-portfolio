@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Filament\Admin\Resources\Skills\Pages\CreateSkill;
 use App\Filament\Admin\Resources\Skills\Pages\EditSkill;
+use App\Filament\Admin\Resources\Skills\SkillResource;
 use App\Models\Skill;
 use App\Models\User;
 use Filament\Facades\Filament;
@@ -50,6 +51,16 @@ class SkillResourceTest extends TestCase
         $this->assertSame('Laravel', $skill->name);
         $this->assertNotNull($skill->icon);
         Storage::disk('public')->assertExists($skill->icon);
+    }
+
+    public function test_creating_a_skill_redirects_to_the_list_page(): void
+    {
+        $this->actingAs(User::factory()->create());
+
+        Livewire::test(CreateSkill::class)
+            ->fillForm(['name' => 'Laravel'])
+            ->call('create')
+            ->assertRedirect(SkillResource::getUrl('index'));
     }
 
     public function test_admin_can_edit_a_skill(): void
