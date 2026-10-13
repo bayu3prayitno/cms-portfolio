@@ -41,6 +41,9 @@ class ProjectForm
                 FileUpload::make('image')
                     ->label('Thumbnail')
                     ->image()
+                    ->imageResizeMode('cover')
+                    ->imageResizeTargetWidth('1280')
+                    ->imageResizeTargetHeight('720')
                     ->disk('public')
                     ->directory('project-thumbnails'),
             ]);

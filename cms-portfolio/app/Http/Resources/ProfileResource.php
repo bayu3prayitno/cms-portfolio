@@ -16,8 +16,13 @@ class ProfileResource extends JsonResource
             'about' => $this->about,
             'photo' => $this->photo ? asset('storage/'.$this->photo) : null,
             'gpa' => $this->gpa,
-            'total_projects' => $this->total_projects,
-            'total_technologies' => $this->total_technologies,
+            'resume' => $this->resume ? asset('storage/'.$this->resume) : null,
+            'social_links' => [
+                'instagram' => $this->instagram,
+                'whatsapp' => $this->whatsapp,
+                'github' => $this->github,
+                'linkedin' => $this->linkedin,
+            ],
         ];
     }
 }

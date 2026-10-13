@@ -32,6 +32,9 @@ class ProfileForm
                 FileUpload::make('photo')
                     ->label('Foto Profil')
                     ->image()
+                    ->imageResizeMode('cover')
+                    ->imageResizeTargetWidth('800')
+                    ->imageResizeTargetHeight('800')
                     ->disk('public')
                     ->directory('profile-photos'),
 
@@ -42,19 +45,35 @@ class ProfileForm
                     ->maxValue(4)
                     ->step(0.01),
 
-                TextInput::make('total_projects')
-                    ->label('Jumlah Proyek')
-                    ->numeric()
-                    ->minValue(0)
-                    ->default(0)
-                    ->required(),
+                FileUpload::make('resume')
+                    ->label('Resume / CV')
+                    ->disk('public')
+                    ->directory('profile-resumes')
+                    ->acceptedFileTypes(['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document']),
 
-                TextInput::make('total_technologies')
-                    ->label('Jumlah Teknologi')
-                    ->numeric()
-                    ->minValue(0)
-                    ->default(0)
-                    ->required(),
+                TextInput::make('instagram')
+                    ->label('Instagram')
+                    ->url()
+                    ->placeholder('https://instagram.com/username')
+                    ->maxLength(255),
+
+                TextInput::make('whatsapp')
+                    ->label('WhatsApp')
+                    ->url()
+                    ->placeholder('https://wa.me/6281234567890')
+                    ->maxLength(255),
+
+                TextInput::make('github')
+                    ->label('GitHub')
+                    ->url()
+                    ->placeholder('https://github.com/username')
+                    ->maxLength(255),
+
+                TextInput::make('linkedin')
+                    ->label('LinkedIn')
+                    ->url()
+                    ->placeholder('https://linkedin.com/in/username')
+                    ->maxLength(255),
             ]);
     }
 }

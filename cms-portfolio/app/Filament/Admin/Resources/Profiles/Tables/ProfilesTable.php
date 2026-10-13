@@ -25,10 +25,6 @@ class ProfilesTable
                     ->label('Gelar'),
                 TextColumn::make('gpa')
                     ->label('IPK'),
-                TextColumn::make('total_projects')
-                    ->label('Proyek'),
-                TextColumn::make('total_technologies')
-                    ->label('Teknologi'),
             ])
             ->filters([
                 //

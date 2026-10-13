@@ -20,6 +20,9 @@ class SkillForm
                 FileUpload::make('icon')
                     ->label('Ikon/Logo')
                     ->image()
+                    ->imageResizeMode('cover')
+                    ->imageResizeTargetWidth('256')
+                    ->imageResizeTargetHeight('256')
                     ->disk('public')
                     ->directory('skill-icons'),
             ]);

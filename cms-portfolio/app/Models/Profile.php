@@ -20,13 +20,14 @@ class Profile extends Model
         'about',
         'photo',
         'gpa',
-        'total_projects',
-        'total_technologies',
+        'resume',
+        'instagram',
+        'whatsapp',
+        'github',
+        'linkedin',
     ];
 
     protected $casts = [
         'gpa' => 'decimal:2',
-        'total_projects' => 'integer',
-        'total_technologies' => 'integer',
     ];
 }
