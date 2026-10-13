@@ -15,7 +15,7 @@ class SkillApiTest extends TestCase
         Skill::create(['name' => 'Laravel', 'icon' => 'skill-icons/laravel.png']);
         Skill::create(['name' => 'React', 'icon' => 'skill-icons/react.png']);
 
-        $response = $this->getJson('/api/skills');
+        $response = $this->getJson('/api/id/skills');
 
         $response->assertSuccessful()
             ->assertJsonCount(2, 'data')
@@ -31,7 +31,7 @@ class SkillApiTest extends TestCase
 
     public function test_it_returns_an_empty_array_when_no_skills_exist(): void
     {
-        $response = $this->getJson('/api/skills');
+        $response = $this->getJson('/api/id/skills');
 
         $response->assertSuccessful()
             ->assertJsonCount(0, 'data');
@@ -41,8 +41,20 @@ class SkillApiTest extends TestCase
     {
         Skill::create(['name' => 'Node.js']);
 
-        $response = $this->getJson('/api/skills');
+        $response = $this->getJson('/api/id/skills');
 
         $response->assertJsonPath('data.0.icon', null);
+    }
+
+    public function test_it_is_also_reachable_on_the_en_endpoint(): void
+    {
+        Skill::create(['name' => 'Laravel']);
+
+        $this->getJson('/api/en/skills')->assertSuccessful();
+    }
+
+    public function test_unsupported_locale_in_url_returns_404(): void
+    {
+        $this->getJson('/api/fr/skills')->assertNotFound();
     }
 }

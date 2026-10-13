@@ -14,7 +14,7 @@ class ProfileApiTest extends TestCase
     {
         $this->makeProfile();
 
-        $response = $this->getJson('/api/profile');
+        $response = $this->getJson('/api/id/profile');
 
         $response->assertSuccessful()
             ->assertJsonStructure([
@@ -32,44 +32,36 @@ class ProfileApiTest extends TestCase
             ->assertJsonPath('data.name', 'Bayu Prayitno');
     }
 
-    public function test_it_responds_in_indonesian_by_default(): void
+    public function test_it_responds_in_indonesian_on_the_id_endpoint(): void
     {
         $this->makeProfile();
 
-        $response = $this->getJson('/api/profile', [
-            'Accept-Language' => 'id',
-        ]);
+        $response = $this->getJson('/api/id/profile');
 
         $response->assertJsonPath('data.title', 'Mahasiswa Informatika')
             ->assertJsonPath('data.about', 'Tentang saya');
     }
 
-    public function test_it_responds_in_english_when_requested(): void
+    public function test_it_responds_in_english_on_the_en_endpoint(): void
     {
         $this->makeProfile();
 
-        $response = $this->getJson('/api/profile', [
-            'Accept-Language' => 'en',
-        ]);
+        $response = $this->getJson('/api/en/profile');
 
         $response->assertJsonPath('data.title', 'Informatics Student')
             ->assertJsonPath('data.about', 'About me');
     }
 
-    public function test_it_falls_back_to_default_locale_when_header_is_unsupported(): void
+    public function test_unsupported_locale_in_url_returns_404(): void
     {
         $this->makeProfile();
 
-        $response = $this->getJson('/api/profile', [
-            'Accept-Language' => 'fr',
-        ]);
-
-        $response->assertJsonPath('data.title', 'Mahasiswa Informatika');
+        $this->getJson('/api/fr/profile')->assertNotFound();
     }
 
     public function test_it_returns_404_when_no_profile_exists_yet(): void
     {
-        $this->getJson('/api/profile')->assertNotFound();
+        $this->getJson('/api/id/profile')->assertNotFound();
     }
 
     private function makeProfile(): Profile
